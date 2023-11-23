@@ -1,11 +1,31 @@
 "use client";
 
-import { useRaffleEnterRaffle, useRaffleGetEntranceFee } from "@/generated";
+import { useToast } from "@/components/ui/use-toast";
+import {
+  useRaffleEnterRaffle,
+  useRaffleEvent,
+  useRaffleGetEntranceFee,
+  useRaffleGetNumberOfPlayers,
+  useRaffleGetRecentWinner,
+} from "@/generated";
 import { formatUnits } from "viem";
 import { useAccount } from "wagmi";
 
 export const Raffle = () => {
+  const { toast } = useToast();
   const { data: enteranceFee, isLoading, isError } = useRaffleGetEntranceFee();
+  const { data: numPlayers } = useRaffleGetNumberOfPlayers({ watch: true });
+  const { data: recentWinner } = useRaffleGetRecentWinner({ watch: true });
+  useRaffleEvent({
+    eventName: "RaffleEnter",
+    listener: () => {
+      toast({
+        title: "Nice 1, you are in the raffle!",
+        description: "Good luck! :finger_crossed:",
+      });
+    },
+  });
+
   const { isConnected } = useAccount();
   const { write, isLoading: isLoadingEnterRaffle } = useRaffleEnterRaffle();
 
@@ -21,6 +41,8 @@ export const Raffle = () => {
           <p className="text-lg">
             Enterance fee is {formatUnits(enteranceFee, 18)} ETH
           </p>
+          <p className="text-lg">Number of players: {numPlayers?.toString()}</p>
+          <p className="text-lg">Recent winner: {recentWinner}</p>
           <button
             disabled={isLoadingEnterRaffle}
             onClick={() => write({ value: enteranceFee })}
