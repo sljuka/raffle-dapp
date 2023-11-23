@@ -1,3 +1,21 @@
+# Raffle (lottery) dapp
+
+This is a tutorial project for learning how to build dapps with [Ethereum](https://ethereum.org/en/) and [Next.js](https://nextjs.org/).
+It is continuation to [smart contracts tutorial](https://github.com/smartcontractkit/full-blockchain-solidity-course-js#lesson-9-hardhat-smart-contract-lottery) by Patrick Collins.
+
+Instead of using react-moralis and other web3 tools from the tutorial. This one is using [Wagmi](https://wagmi.sh/) which seems like a better [alternative](https://wagmi.sh/react/comparison).
+
+Tutorial covers:
+
+- connecting to injected metamask wallet
+- connecting to local hardhat network via metamask
+- retrieving network info, account info, balance info...
+- retrieving data from smart contract
+- sending transactions to smart contract
+- listening to events from smart contract
+- e2e type safety with wagmi CLI and contract ABI
+- styling using [Tailwind CSS](https://tailwindcss.com/) and Radix UI
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
